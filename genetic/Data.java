@@ -26,7 +26,7 @@ public class Data
 			if(pairings[i] == -1)
 				total+=INFINITY;
 			else
-				total+=ratings[i][pairings[i]];
+				total+=ratings[i][pairings[i]]*ratings[i][pairings[i]];
 		}
 		return total;
 	}
