@@ -1,0 +1,26 @@
+A,Q
+B,T
+C,W
+D,N
+E,O
+F,S 
+G,L
+H,M
+I,U
+J,Y
+K,R
+L,G
+M,H
+N,D
+O,E
+P,Z
+Q,A
+R,K
+S ,F
+T,B
+U,I
+V,X
+W,C
+X,V
+Y,J
+Z,P

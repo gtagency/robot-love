@@ -1,7 +1,6 @@
 import java.util.Random;
 public class Data
 {
-	public static final int INFINITY = 100000;
 	public int[] pairings;
 	public Data(int size)
 	{
@@ -24,7 +23,7 @@ public class Data
 		for(int i = 0; i < pairings.length; i++)
 		{
 			if(pairings[i] == -1)
-				total+=INFINITY;
+				total+=ratings[i][i]*ratings[i][i];
 			else
 				total+=ratings[i][pairings[i]]*ratings[i][pairings[i]];
 		}
