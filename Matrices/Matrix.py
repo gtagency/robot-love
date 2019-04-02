@@ -1,5 +1,5 @@
 basicallyinfinity = 100000000
-questions = ["timestamp","email","year","gender","orientation","politics","ethnicity","notpolitics","religion","notreligion","soulmate","sports","time","answers","money","smoke","spontaneous","420","childgay","sex", "difficultconversations","music","design","politicallyincorrect","emotionalvulnerability","donothing","outdoorsy","genderroles","drinks","drugs","sameethnicity","inperson"]
+questions = ["timestamp","email","year","graduation","gender","orientation","politics","ethnicity","notpolitics","religion","notreligion","soulmate","sports","time","answers","money","smoke","spontaneous","420","childgay","sex", "difficultconversations","music","design","politicallyincorrect","emotionalvulnerability","donothing","outdoorsy","genderroles","drinks","drugs","sameethnicity","inperson"]
 qs = {}
 for i in range(len(questions)):
 	if questions[i] in qs:
@@ -20,6 +20,8 @@ def weight(p1, p2):
 				    "Homosexual":{"Male":["Male"], "Female":["Female"], "Other":["Other"]},
 				    "Bisexual":{"Male":["Male", "Female"], "Female":["Male", "Female"], "Other":["Male", "Female", "Other"]},
 				    "Pansexual":{"Male":["Male", "Female", "Other"], "Female":["Male", "Female", "Other"], "Other":["Male", "Female", "Other"]}}
+	options = {"Spring 2019" : 1, "Summer 2019" : 2, "Fall 2019" : 3, "After Fall 2019" : 4}
+	t+=dif(options[p1[qs["year"]]], options[p2[qs["year"]]], 0)*1000
 	# if the gender of p2 is not in the list of genders p1 is interested in, set it to basically infinity
 	gender = "Other"
 	if p1[qs["gender"]] in orientations[p1[qs["orientation"]]]:
