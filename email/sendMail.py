@@ -6,7 +6,7 @@ import csv
 
 baseSubject = 'Subject: Your Love Machine Match has been found'
 
-baseMessage = 'You matched with a person using this email address: '
+baseMessage = 'You matched with a person using this email address '
 
 commandStringBase = 'cat mailMessage | msmtp '
 
@@ -20,6 +20,7 @@ with open('addresses.csv') as csv_file:
         message = open('mailMessage', 'r+')
         message.truncate(0)
         message.write(baseSubject)
+        message.write('\n')
         message.write('\n')
         personalMessage = baseMessage + match
         message.write(personalMessage)
