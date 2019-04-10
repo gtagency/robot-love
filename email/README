@@ -1,2 +1,4 @@
 need to have a blank file called mailMessage
 need to have file called addresses.csv that is formatted like exampleAddresses.csv
+
+files are /etc/msmtprc  and ~/.muttrc
