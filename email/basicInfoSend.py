@@ -1,12 +1,9 @@
 import subprocess
 import csv
 
-#run in python 2, idk if python 3 works for this
-#need to follow instructions in the README
+baseSubject = 'Subject: Your Love Machine match will be available soon!'
 
-baseSubject = 'Subject: Your Love Machine Match has been found'
-
-baseMessage = 'You matched with a person using this email address '
+baseMessage = 'Lookout from an email from this address within the next day or so. Check your spam folder'
 
 commandStringBase = 'cat mailMessage | msmtp '
 
@@ -15,15 +12,13 @@ with open('addresses.csv') as csv_file:
     lineCount = 0
     for row in csv_reader:
         reciever = row[0]
-        match = row[1]
-        print('sent mail to ' + reciever + ' they matched with ' + match)
+        print('Sent mail to ' + reciever)
         message = open('mailMessage', 'r+')
         message.truncate(0)
         message.write(baseSubject)
         message.write('\n')
         message.write('\n')
-        personalMessage = baseMessage + match
-        message.write(personalMessage)
+        message.write(baseMessage)
         message.close()
         commandString = commandStringBase + reciever
         subprocess.call(commandString, shell = True)
