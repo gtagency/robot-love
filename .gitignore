@@ -2,6 +2,9 @@
 *~
 *#
 
+#dont share this data
+*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
