@@ -1,5 +1,5 @@
 basicallyinfinity = 100000000
-questions = ["timestamp","email","year","graduation","gender","orientation","politics","ethnicity","notpolitics","religion","notreligion","soulmate","sports","time","answers","money","smoke","spontaneous","420","childgay","sex", "difficultconversations","music","design","politicallyincorrect","emotionalvulnerability","donothing","outdoorsy","genderroles","drinks","drugs","sameethnicity","inperson"]
+questions = ["timestamp","email","year","graduation","gender","orientation","politics","ethnicity","notpolitics","religion","notreligion","soulmate","sports","time","answers","money","smoke","spontaneous","420","childgay","sex", "difficultconversations","music","design","politicallyincorrect","emotionalvulnerability","donothing","outdoorsy","genderroles","drinks","drugs","sameethnicity","inperson", "major", "socialmedia"]
 qs = {}
 for i in range(len(questions)):
 	if questions[i] in qs:
@@ -10,19 +10,28 @@ def dif(a, b, threshold):
 	return max(abs(int(a) - int(b)) - threshold, 0) ** 2
 
 #get weight of p1 towards p2
+#non-symmetric distance
 def weight(p1, p2): 
 	t = 0
 	#0 and 1 aren't used in weights - timestamp + email
-	options = {"1st" : 1, "2nd" : 2, "3rd" : 3, "4th" : 4, "5th" : 5, "6+" : 7, "Grad Student" : 12}
+	
+    #year
+    options = {"1st" : 1, "2nd" : 2, "3rd" : 3, "4th" : 4, "5th" : 5, "6+" : 7, "Grad Student" : 12}
 	t += dif(options[p1[qs["year"]]], options[p2[qs["year"]]], 1)
-	#gender and sexual orientation related
+	
+    #gender and sexual orientation related
 	orientations = {"Heterosexual" : {"Male":["Female"], "Female":["Male"]},
 				    "Homosexual":{"Male":["Male"], "Female":["Female"], "Other":["Other"]},
 				    "Bisexual":{"Male":["Male", "Female"], "Female":["Male", "Female"], "Other":["Male", "Female", "Other"]},
 				    "Pansexual":{"Male":["Male", "Female", "Other"], "Female":["Male", "Female", "Other"], "Other":["Male", "Female", "Other"]}}
-	options = {"Spring 2019" : 1, "Summer 2019" : 2, "Fall 2019" : 3, "After Fall 2019" : 4}
+	
+    """
+    options = {"Spring 2019" : 1, "Summer 2019" : 2, "Fall 2019" : 3, "After Fall 2019" : 4}
 	t+=dif(options[p1[qs["year"]]], options[p2[qs["year"]]], 0)*1000
-	# if the gender of p2 is not in the list of genders p1 is interested in, set it to basically infinity
+    """
+    
+	#If the gender of p2 is not in the list of genders p1 is interested in, set it to basically infinity
+    #This will rarely happen in the gale-shapely implementation
 	gender = "Other"
 	if p1[qs["gender"]] in orientations[p1[qs["orientation"]]]:
 		gender = p1[qs["gender"]]
@@ -68,23 +77,24 @@ def weight(p1, p2):
 	#politically incorrect
 	t+=dif(p1[qs["politicallyincorrect"]],p2[qs["politicallyincorrect"]],0)
 	#emotional vulnerability
-	t+=dif(p1[qs["emotionalvulnerability"]],p2[qs["emotionalvulnerability"]],0)*3
+	t+=dif(p1[qs["emotionalvulnerability"]],p2[qs["emotionalvulnerability"]],0) * 3
 	#do nothing
 	t+=dif(p1[qs["donothing"]],p2[qs["donothing"]],1)
 	#outdoorsy
 	t+=dif(p1[qs["outdoorsy"]],p2[qs["outdoorsy"]],1)
 	#gender roles
-	t+=dif(p1[qs["genderroles"]],p2[qs["genderroles"]],0)*10
+	t+=dif(p1[qs["genderroles"]],p2[qs["genderroles"]],0) * 10
 	#drinks
-	t+=dif(p1[qs["drinks"]],p2[qs["drinks"]],0)*10
+	t+=dif(p1[qs["drinks"]],p2[qs["drinks"]],0) * 10
 	#harder drugs
-	t+=dif(p1[qs["drugs"]],p2[qs["drugs"]],0)*10
+	t+=dif(p1[qs["drugs"]],p2[qs["drugs"]],0) * 10
 	#robomatch in person
 	t+=dif(p1[qs["inperson"]],p2[qs["inperson"]],0)**2
 	if p1 == p2:
 		t = 1000 * 3**int(p1[qs["inperson"]])
 	return t
-	
+
+"""	
 input()
 people = []
 try:
@@ -97,3 +107,4 @@ except:
 print(",".join([i[1] for i in people]))
 for j in people:
 	print(",".join([str(weight(j,i)) for i in people]))
+"""    
