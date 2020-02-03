@@ -17,7 +17,7 @@ def weight(p1, p2):
 
     #year
     options = {"1st" : 1, "2nd" : 2, "3rd" : 3, "4th" : 4, "5th" : 5, "6+" : 7, "Grad Student" : 12}
-    t += dif(options[p1[qs["year"]]], options[p2[qs["year"]]], 1)
+    t += dif(options[p1[qs["year"]]], options[p2[qs["year"]]], 1) * 12
 
     #gender and sexual orientation related
     orientations = {"Heterosexual" : {"Male":["Female"], "Female":["Male"]}, 
@@ -89,7 +89,7 @@ def weight(p1, p2):
     #harder drugs
     t+=dif(p1[qs["drugs"]],p2[qs["drugs"]],0) * 10
     #robomatch in person
-    t+=dif(p1[qs["inperson"]],p2[qs["inperson"]],0)**2
+    t+=dif(p1[qs["inperson"]],p2[qs["inperson"]],0)**3
     if p1 == p2:
         t = 1000 * 3**int(p1[qs["inperson"]])
     return t

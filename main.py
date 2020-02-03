@@ -116,8 +116,9 @@ print(f"Matched {len(matched)} people!")
 
 with open('2020matches.csv', 'w', newline='', encoding='utf8') as file:
     writer = csv.writer(file)
+    writer.writerow(["Person 1", "Gender", "Year", "Sexual Orientation", "Interest", "Social Media", "Person 2", "Gender", "Year", "Sexual Orientation", "Interest", "Social Media"])
     for match_dict in matches:
         for p1, p2 in match_dict.items():
-            writer.writerow([p1, responses[p1][34], p2, responses[p2][34]])
+            writer.writerow([p1, responses[p1][4], responses[p1][2], responses[p1][5], responses[p1][32], responses[p1][34], p2, responses[p2][4], responses[p2][2], responses[p2][5], responses[p2][32], responses[p2][34]])
         
         
